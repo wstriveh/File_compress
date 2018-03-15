@@ -17,18 +17,18 @@ HuffmanTree<T>::HuffmanTree(const T* array, size_t size, int vailed) : _root(NUL
 template <typename T>
 HuffmanNode<T>* HuffmanTree<T>::_CreateHuffmanTree(const T* array, size_t size, int valid)
 {
-	//Ñ¡×îĞ¡£¬¼õĞ¡¶Ñ
+	//é€‰æœ€å°ï¼Œå‡å°å †
 	Heap<Node*, Less> heap;
 	Node* parent = NULL;
 
-	for (size_t i = 0; i < size; ++i)//Íù¶ÑÀïÈë½áµã
+	for (size_t i = 0; i < size; ++i)//å¾€å †é‡Œå…¥ç»“ç‚¹
 	{
 		if (array[i] != valid)
 		{
 			heap.Push(new Node(array[i]));
 		}
 	}
-	/*Õâ±ßÅĞ¶ÏÌõ¼şĞèÒªÊÇ Size() > 1 ÒòÎªÒ»¸ö½Úµã²»ĞèÒª½¨Ê÷£¬¶øÇÒ´óÓÚÁ½¸ö½Úµã²Å¿ÉÒÔÒ»´ÎÈ¡Á½¸ö½Úµã*/
+	/*è¿™è¾¹åˆ¤æ–­æ¡ä»¶éœ€è¦æ˜¯ Size() > 1 å› ä¸ºä¸€ä¸ªèŠ‚ç‚¹ä¸éœ€è¦å»ºæ ‘ï¼Œè€Œä¸”å¤§äºä¸¤ä¸ªèŠ‚ç‚¹æ‰å¯ä»¥ä¸€æ¬¡å–ä¸¤ä¸ªèŠ‚ç‚¹*/
 	while (heap.Size() > 1)
 	{
 		Node* minFirst = heap.Top();
@@ -65,5 +65,4 @@ HuffmanNode<T>* HuffmanTree<T>::GetHuffmanNode()
 {
 	return this->_root;
 }
-
 #endif 
