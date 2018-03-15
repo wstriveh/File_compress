@@ -22,7 +22,7 @@ void FileCompress::CompressHuffCode(const char* filename)
 	assert(filename);
 	FILE* fOut = fopen(filename, "rb");
 	assert(fOut);
-	//Í³¼Æ×Ö·û³öÏÖµÄ´ÎÊı
+	//ç»Ÿè®¡å­—ç¬¦å‡ºç°çš„æ¬¡æ•°
 	char ch = fgetc(fOut);
 	while (!feof(fOut))
 	{
@@ -30,17 +30,17 @@ void FileCompress::CompressHuffCode(const char* filename)
 		ch = fgetc(fOut);
 	}
 
-	//½¨Á¢¹ş·òÂüÊ÷
+	//å»ºç«‹å“ˆå¤«æ›¼æ ‘
 	HuffmanTree<CharInfo> huffTree(this->_info, sizeof(this->_info) / sizeof(this->_info[0]), 0);
 
-	//Éú³É¹ş·òÂü±àÂë
+	//ç”Ÿæˆå“ˆå¤«æ›¼ç¼–ç 
 	string code;
 	HuffmanNode<CharInfo>* root = huffTree.GetHuffmanNode();
 	GenerateHuffmanCode(root, *this, code);
 
-	//Éú³ÉÑ¹ËõÎÄ¼şÃû¼°ÅäÖÃÎÄ¼şÃû
-	string fileInName = (string)filename; //Ñ¹ËõÎÄ¼şÃû
-	string fileConfig = fileInName;//ÅäÖÃÎÄ¼şÃû
+	//ç”Ÿæˆå‹ç¼©æ–‡ä»¶ååŠé…ç½®æ–‡ä»¶å
+	string fileInName = (string)filename; //å‹ç¼©æ–‡ä»¶å
+	string fileConfig = fileInName;//é…ç½®æ–‡ä»¶å
 	size_t last_ = fileInName.find_last_of('.');
 	if (last_ < fileInName.size())
 	{
@@ -50,12 +50,12 @@ void FileCompress::CompressHuffCode(const char* filename)
 	fileInName += ".huff";
 	fileConfig += ".config";
 
-	//fileInName = "E:\\Ò¦ÑşÎÄ¼şÑ¹ËõÎÄ¼ş\\yaoyaoh";
-	//fileConfig = "E:\\Ò¦ÑşÎÄ¼şÑ¹ËõÎÄ¼ş\\yaoyao.config";
+	//fileInName = "E:\\å§šç‘¶æ–‡ä»¶å‹ç¼©æ–‡ä»¶\\yaoyaoh";
+	//fileConfig = "E:\\å§šç‘¶æ–‡ä»¶å‹ç¼©æ–‡ä»¶\\yaoyao.config";
 
 	string tmp;
 
-	//Éú³ÉÑ¹ËõÅäÖÃÎÄ¼ş
+	//ç”Ÿæˆå‹ç¼©é…ç½®æ–‡ä»¶
 	FILE* fConfig = fopen(fileConfig.c_str(), "wb");
 	char buff[20] = { 0 };
 	for (size_t i = 0; i < sizeof(this->_info) / sizeof(this->_info[0]); ++i)
@@ -71,14 +71,14 @@ void FileCompress::CompressHuffCode(const char* filename)
 		}
 	}
 
-	//¶ÔÎÄ¼ş½øĞĞÑ¹Ëõ
+	//å¯¹æ–‡ä»¶è¿›è¡Œå‹ç¼©
 	FILE* fIn = fopen(fileInName.c_str(), "wb");
 	assert(fIn);
 	fseek(fOut, 0, SEEK_SET);
 	int pos = 0;
 	unsigned char putch = 0;
 	ch = fgetc(fOut);
-	while (!feof(fOut))
+	while (!feof(fOut)) 
 	{
 		tmp = this->_info[(unsigned char)ch]._code;
 		for (size_t i = 0; i < tmp.size(); ++i)
@@ -129,7 +129,7 @@ void FileCompress::UnCompressHuffCode(const char* filename)
 	assert(filename);
 	FILE* fOut = fopen(filename, "rb");
 	assert(fOut);
-	//¶ÁÈ¡ÎÄ¼ş£¬
+	//è¯»å–æ–‡ä»¶ï¼Œ
 	string fileConfig = (string)filename;
 	string fileInName = fileConfig;
 	size_t last_ = fileInName.find_last_of('.');
@@ -141,37 +141,37 @@ void FileCompress::UnCompressHuffCode(const char* filename)
 	fileConfig += ".config";
 	fileInName += "_Com.txt";
 
-	//fileInName = "E:\\Ò¦ÑşÎÄ¼şÑ¹ËõÎÄ¼ş\\yaoyao.txt";
-	//fileConfig = "E:\\Ò¦ÑşÎÄ¼şÑ¹ËõÎÄ¼ş\\yaoyao.config";
+	//fileInName = "E:\\å§šç‘¶æ–‡ä»¶å‹ç¼©æ–‡ä»¶\\yaoyao.txt";
+	//fileConfig = "E:\\å§šç‘¶æ–‡ä»¶å‹ç¼©æ–‡ä»¶\\yaoyao.config";
 
 	FILE* fIn = fopen(fileInName.c_str(), "wb");
 	assert(fIn);
 	FILE* fConfig = fopen(fileConfig.c_str(), "rb");
 	assert(fConfig);
 
-	//ĞŞ¸Ä_count,×¢Òâ\n£¬ÓĞ¿ÉÄÜ´ú±í×Ö·û£¬ÓĞ¿ÉÄÜÊÇĞĞ½áÊø±êÖ¾
+	//ä¿®æ”¹_count,æ³¨æ„\nï¼Œæœ‰å¯èƒ½ä»£è¡¨å­—ç¬¦ï¼Œæœ‰å¯èƒ½æ˜¯è¡Œç»“æŸæ ‡å¿—
 	char buff[20] = { 0 };
 	unsigned char ch = fgetc(fConfig);
 	while (!feof(fConfig))
 	{
-		fgetc(fConfig);//¶ÁÈ¡Ã°ºÅ
+		fgetc(fConfig);//è¯»å–å†’å·
 		fgets(buff, 20, fConfig);
 		this->_info[ch]._count = (TypeLong)atoi((buff));
 		ch = fgetc(fConfig);
 	}
 
-	//ÖØ½¨¹ş·òÂüÊ÷
+	//é‡å»ºå“ˆå¤«æ›¼æ ‘
 	HuffmanTree<CharInfo> tree(this->_info, sizeof(this->_info) / sizeof(this->_info[0]), 0);
 	HuffmanNode<CharInfo>* root = tree.GetHuffmanNode();
 	HuffmanNode<CharInfo>* cur = root;
-	TypeLong countSum = root->_weight._count; //¼ÇÂ¼×Ö·ûµÄ×Ü¸öÊı¿ØÖÆ½áÊø
+	TypeLong countSum = root->_weight._count; //è®°å½•å­—ç¬¦çš„æ€»ä¸ªæ•°æ§åˆ¶ç»“æŸ
 	ch = fgetc(fOut);
 	int pos = 7;
 	while (countSum > 0)
 	{
 		while (pos >= 0)
 		{
-			if ((ch & (1 << pos)) == 0) //Ïò×ó×ß
+			if ((ch & (1 << pos)) == 0) //å‘å·¦èµ°
 			{
 				cur = cur->_left;
 			}
@@ -184,7 +184,7 @@ void FileCompress::UnCompressHuffCode(const char* filename)
 				fputc(cur->_weight._ch, fIn);
 				//cout << cur->_weight._ch;
 
-				if (--countSum == 0)//½«Ã»ÓĞĞ´µÄ×Ö·ûµÄ´ÎÊı¼õ1
+				if (--countSum == 0)//å°†æ²¡æœ‰å†™çš„å­—ç¬¦çš„æ¬¡æ•°å‡1
 					break;
 				cur = root;
 			}
