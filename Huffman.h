@@ -32,7 +32,7 @@ public:
 protected:
 	static Node* _CreateHuffmanTree(const T* array, size_t size, int vailed = 0);
 	static void _Clear(Node* root);
-protected:
+protected:    
 	Node* _root;
 };
    
