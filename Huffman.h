@@ -12,7 +12,7 @@ struct HuffmanNode
 	HuffmanNode* _right;
 	HuffmanNode(T weight = 0) :_weight(weight), _left(NULL), _right(NULL)
 	{}
-	//建堆时要用
+	//陆篓露脩脢卤脪陋脫脙
 	//bool operator<(const HuffmanNode* right)
 	//{
 	//	return this->_weight < right->_weight;
@@ -35,5 +35,5 @@ protected:
 protected:
 	Node* _root;
 };
-
+   
 #endif 
