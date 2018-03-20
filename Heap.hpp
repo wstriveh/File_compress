@@ -41,7 +41,7 @@ template <typename T, template<class> class Compare>
 Heap<T, Compare>& Heap<T, Compare>::operator=(const Heap<T, Compare>& heap)
 {
 	if (this != &heap)
-	{
+	{    
 		this->_array = heap._array;
 	}
 	return *this;
@@ -142,15 +142,15 @@ std::ostream& operator<<(std::ostream& out, const Heap<T, Compare>& heap)
 template <typename T, template<class> class Compare>
 void HeapSort(T* array, size_t size, const Compare<T>& com)
 {
-	CrtHeap(array, size, com);//½¨³õ¶Ñ
+	CrtHeap(array, size, com);//å»ºåˆå †
 	for (int i = size - 1; i > 0; --i)
 	{
-		swap(array[0], array[i]); //½»»»Í·ºÍÎ²
-		AdjustDown(array, i, 0, com); //Ê¹µÃ0...i-1Ò²Îª¶Ñ
+		swap(array[0], array[i]); //äº¤æ¢å¤´å’Œå°¾
+		AdjustDown(array, i, 0, com); //ä½¿å¾—0...i-1ä¹Ÿä¸ºå †
 	}
 }
 
-//½¨³õ¶Ñ
+//å»ºåˆå †
 template <typename T, template<class> class Compare>
 void CrtHeap(T* array, size_t size, const Compare<T>& com)
 {
@@ -161,7 +161,7 @@ void CrtHeap(T* array, size_t size, const Compare<T>& com)
 	}
 }
 
-//ÏÂµ÷ £¬Compare
+//ä¸‹è°ƒ ï¼ŒCompare
 template <typename T, template<class> class Compare>
 void AdjustDown(T* array, size_t size, int parent, const Compare<T>& com)
 {
@@ -194,7 +194,7 @@ void GetTopK(T* array, const vector<T>& money, const size_t& k, const size_t& n,
 	{
 		array[i] = money[i];
 	}
-	//½¨¶Ñ
+	//å»ºå †
 	for (int i = (k - 2) / 2; i >= 0; --i)
 	{
 		AdjustDown(array, k, i, com);
