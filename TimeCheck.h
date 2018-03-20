@@ -5,7 +5,7 @@
 #include<iostream>
 using namespace std;
  
-class MyTimer
+class MyTimer   
 {
 public:
 	MyTimer()
