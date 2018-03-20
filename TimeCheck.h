@@ -26,7 +26,7 @@ public:
 		{
 			QueryPerformanceCounter(&_array[i]._end);
 		}
-	}
+	}   
 	void Reset()
 	{
 		costTime = 0.0;
