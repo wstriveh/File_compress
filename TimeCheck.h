@@ -11,7 +11,7 @@ public:
 	MyTimer()
 	{
 		QueryPerformanceFrequency(&_freq);
-		costTime = 0.0;
+	    	costTime = 0.0;
 	}
 	void Start()
 	{
