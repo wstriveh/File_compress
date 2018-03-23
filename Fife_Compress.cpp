@@ -7,7 +7,7 @@ using namespace std;
 #include <assert.h>     
 #include "File_Compress.h"
 
-FileCompress::FileCompress()
+FileCompress::FileCompress()     
 {
 	size_t size = sizeof(this->_info) / sizeof(this->_info[0]);
 	for (size_t i = 0; i < size; ++i)
