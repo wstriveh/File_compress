@@ -76,7 +76,7 @@ void FileCompress::CompressHuffCode(const char* filename)
 	assert(fIn);
 	fseek(fOut, 0, SEEK_SET);
 	int pos = 0;
-	unsigned char putch = 0;
+	unsigned char putch = 0;   
 	ch = fgetc(fOut);
 	while (!feof(fOut)) 
 	{
