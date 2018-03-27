@@ -16,7 +16,7 @@ FileCompress::FileCompress()
 		this->_info[i]._count = 0;
 	}
 }
-
+    
 void FileCompress::CompressHuffCode(const char* filename)
 {
 	assert(filename);
