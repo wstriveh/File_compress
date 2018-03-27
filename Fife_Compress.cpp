@@ -32,7 +32,7 @@ void FileCompress::CompressHuffCode(const char* filename)
 
 	//建立哈夫曼树
 	HuffmanTree<CharInfo> huffTree(this->_info, sizeof(this->_info) / sizeof(this->_info[0]), 0);
-
+   
 	//生成哈夫曼编码         
 	string code;
 	HuffmanNode<CharInfo>* root = huffTree.GetHuffmanNode();
